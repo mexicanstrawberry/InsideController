@@ -2,7 +2,7 @@
 #include <SPI.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#include <SoftPWM.h>
+//#include <SoftPWM.h>
 
 #define Fan_1_Pin       2 /* Pin  4 SOFT */
 #define Fan_2_Pin       3 /* Pin  5 PWM  */
@@ -23,9 +23,9 @@ DallasTemperature sensors(&oneWire);
 DeviceAddress Temp_1, Temp_2, Temp_3;
 
 void test(){
-  SoftPWMSet (Fan_1_Pin, 100);
+  //SoftPWMSet (Fan_1_Pin, 100);
   analogWrite(Fan_2_Pin, 100);
-  SoftPWMSet (Fan_3_Pin, 100);
+  //SoftPWMSet (Fan_3_Pin, 100);
   analogWrite(Light_1_Pin, 100);
   analogWrite(Light_2_Pin, 100);
   analogWrite(Light_3_Pin, 100);
@@ -34,7 +34,7 @@ void test(){
 void setup() {
   SPI.begin();
   dht.begin();
-  SoftPWMBegin();
+  //SoftPWMBegin();
   test();
 }
 
