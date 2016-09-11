@@ -1,0 +1,15 @@
+reset           1   28
+rx              2   27
+tx              3   26
+FanSoftPWM      4   25
+FanPWM          5   24
+FanSoftPWM      6   23
+VCC             7   22 GND
+GND             8   21 5V
+xtal            9   20 VCC
+xtak           10   19 SCK
+LightPWM       11   18 MISO
+LightPWM       12   17 MOSI
+1 Wire Dallas  13   16 SS
+DHT            14   15 LightPWM
+
