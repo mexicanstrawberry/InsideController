@@ -5,20 +5,21 @@
 #define WAIT_FOR_SIZE        2
 #define WAIT_FOR_DATA        3
 
-#define SECOND  1
-#define MINUTE 60 * SECOND
-#define HOUR   60 * MINUTE
-#define DAY    24 * HOUR
+#define MILLIS    1
+#define SECOND 1000 * MILLIS
+#define MINUTE   60 * SECOND
+#define HOUR     60 * MINUTE
+#define DAY      24 * HOUR
 
 uint8_t       commandIndex = 0;
 uint8_t       command      = 0x00;
 uint8_t       subCommand   = 0x00;
 uint8_t       size         = 0;
-uint32_t      uptime       = millis(); // we update this when we first enter the command to have a consistant value
 bool          reboot       = false;
 float         temp_f       = 0.0;
 uint8_t       temp_i       = 0;
 uint16_t      temp_ii      = 0;
+uint32_t      temp_iii     = 0;
 
 uint8_t processMessage(uint8_t c){  
   switch(commandIndex){
@@ -63,18 +64,18 @@ uint8_t processMessage(uint8_t c){
             case SUB_CMD_FIRMWARE_GET_UPTIME:
               switch (commandIndex){
                 case 3:
-                  uptime = millis();
+                  temp_iii = millis();
                   //days
-                  return abs(uptime/DAY);
+                  return abs(temp_iii/DAY);
                 case 4:
                   // hours
-                  return ((uptime % DAY) / HOUR);
+                  return ((temp_iii % DAY) / HOUR);
                 case 5:
                   // minutes
-                  return ((uptime % HOUR) / MINUTE);
+                  return ((temp_iii % HOUR) / MINUTE);
                 case 6:
                   // seconds
-                  return ((uptime % MINUTE) / SECOND);
+                  return ((temp_iii % MINUTE) / SECOND);
                 default:
                   return 0xFF;
               }
