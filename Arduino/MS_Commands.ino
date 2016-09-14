@@ -66,16 +66,16 @@ uint8_t processMessage(uint8_t c){
                 case 3:
                   temp_iii = millis();
                   //days
-                  return (int)(temp_iii / DAY);
+                  return (uint8_t)(temp_iii / DAY);
                 case 4:
                   // hours
-                  return ((temp_iii % DAY) / HOUR);
+                  return (int)((temp_iii % DAY) / HOUR);
                 case 5:
                   // minutes
-                  return ((temp_iii % HOUR) / MINUTE);
+                  return (int)((temp_iii % HOUR) / MINUTE);
                 case 6:
                   // seconds
-                  return ((temp_iii % MINUTE) / SECOND);
+                  return (int)((temp_iii % MINUTE) / SECOND);
                 default:
                   return 0xFF;
               }
