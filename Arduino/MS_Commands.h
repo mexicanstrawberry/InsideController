@@ -2,9 +2,10 @@
 #define SUB_CMD_NETWORK_PING                          0x00
 
 #define     CMD_FIRMWARE                              0x10
-#define SUB_CMD_FIRMWARE_GET_FIRMWARE_VERSION         0x20
-#define SUB_CMD_FIRMWARE_GET_UPTIME                   0x30
-#define SUB_CMD_FIRMWARE_SET_REBOOT                   0x40
+#define SUB_CMD_FIRMWARE_GET_CONTROLLER_TYPE          0x00
+#define SUB_CMD_FIRMWARE_GET_FIRMWARE_VERSION         0x10
+#define SUB_CMD_FIRMWARE_GET_UPTIME                   0x20
+#define SUB_CMD_FIRMWARE_SET_REBOOT                   0x30
 
 #define     CMD_SENSOR                                0x20
 #define SUB_CMD_SENSOR_GET_TEMPERATURE_OUTSIDE        0x00
