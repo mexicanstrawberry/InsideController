@@ -129,7 +129,7 @@ uint8_t processMessage(uint8_t c){
                   default:
                     return 0xFF;
                 }
-             case SUB_CMD_SENSOR_SET_TEMPERATURE_LIGHT1:
+             case SUB_CMD_SENSOR_GET_TEMPERATURE_LIGHT1:
                 switch (commandIndex){
                   case 3:
                     temp_f = DataStorage.temperature_light1;
