@@ -42,6 +42,13 @@ uint8_t processMessage(uint8_t c){
           }
         case CMD_FIRMWARE:
           switch(subCommand){
+            case SUB_CMD_FIRMWARE_GET_CONTROLLER_TYPE:
+              switch(commandIndex){
+                case 3:
+                  return CONTROLLER_TYPE;
+                default:
+                  return 0xFF;
+              }            
             case SUB_CMD_FIRMWARE_GET_FIRMWARE_VERSION:
               switch(commandIndex){
                 case 3:
