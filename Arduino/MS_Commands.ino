@@ -5,12 +5,6 @@
 #define WAIT_FOR_SIZE        2
 #define WAIT_FOR_DATA        3
 
-#define MILLIS    1.0
-#define SECOND 1000 * MILLIS
-#define MINUTE   60 * SECOND
-#define HOUR     60 * MINUTE
-#define DAY      24 * HOUR
-
 uint8_t       commandIndex = 0;
 uint8_t       command      = 0x00;
 uint8_t       subCommand   = 0x00;
@@ -66,29 +60,36 @@ uint8_t processMessage(uint8_t c){
                 case 3:
                   temp_iii = millis();
                   //days
-                  return (uint8_t)(temp_iii / DAY);
+                  return ((temp_iii>>(8*3)) && 0xFF);
                 case 4:
                   // hours
-                  return (uint8_t)((temp_iii % DAY) / HOUR);
+                  return ((temp_iii>>(8*2)) && 0xFF);
                 case 5:
                   // minutes
-                  return (uint8_t)((temp_iii % HOUR) / MINUTE);
+                  return ((temp_iii>>(8*1)) && 0xFF);
                 case 6:
                   // seconds
-                  return (uint8_t)((temp_iii % MINUTE) / SECOND);
+                  return ((temp_iii>>(8*0)) && 0xFF);
                 default:
                   return 0xFF;
               }
             case SUB_CMD_FIRMWARE_SET_REBOOT:
               switch (commandIndex){
                 case 3:
-                  reboot = (c == 'M');
-                  return 0xFF;
+                  if (c == 'M'){
+                    reboot = HIGH;
+                    return 0x00;
+                  }else{
+                    reboot = LOW;
+                    return 0xFF;
+                  }
                 case 4:
                   if (reboot && c == 'S'){
                     wdt_enable(WDTO_250MS);
+                    return 0x00;
+                  }else{
+                    return 0xFF;
                   }
-                  return 0xFF;
                 default:
                   return 0xFF;
               }
