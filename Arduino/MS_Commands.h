@@ -1,8 +1,3 @@
-#define WAIT_FOR_COMMAND       0
-#define WAIT_FOR_SUBCOMMAND    1
-#define WAIT_FOR_SIZE          2
-#define WAIT_FOR_DATA          3
-
 #define     CMD_NETWORK                               0x00
 #define SUB_CMD_NETWORK_PING                          0x00
 
