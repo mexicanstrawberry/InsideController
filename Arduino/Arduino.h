@@ -1,5 +1,6 @@
 #define TEMPERATURE_PRECISION  9
 
+#define CONTROLLER_TYPE       0x00
 #define FIRMWARE_MAJOR        0x23
 #define FIRMWARE_MINOR        0x42
 #define FIRMWARE_BUILDVERSION 0x69
@@ -34,7 +35,7 @@ struct Data_s {
   uint8_t  fs;
   uint8_t  uv;
 
-  uint8_t heater_air;
-  uint8_t heater_water;
+  uint8_t  heater_air;
+  uint8_t  heater_water;
 };
 
