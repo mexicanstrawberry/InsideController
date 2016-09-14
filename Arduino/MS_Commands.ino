@@ -9,7 +9,7 @@ uint8_t       commandIndex = 0;
 uint8_t       command      = 0x00;
 uint8_t       subCommand   = 0x00;
 uint8_t       size         = 0;
-bool          reboot       = false;
+bool          temp_b       = false;
 float         temp_f       = 0.0;
 uint8_t       temp_i       = 0;
 uint16_t      temp_ii      = 0;
@@ -60,16 +60,16 @@ uint8_t processMessage(uint8_t c){
                 case 3:
                   temp_iii = millis();
                   //days
-                  return ((temp_iii>>(8*3)) && 0xFF);
+                  return ((temp_iii>>(8*3)) & 0xFF);
                 case 4:
                   // hours
-                  return ((temp_iii>>(8*2)) && 0xFF);
+                  return ((temp_iii>>(8*2)) & 0xFF);
                 case 5:
                   // minutes
-                  return ((temp_iii>>(8*1)) && 0xFF);
+                  return ((temp_iii>>(8*1)) & 0xFF);
                 case 6:
                   // seconds
-                  return ((temp_iii>>(8*0)) && 0xFF);
+                  return ((temp_iii>>(8*0)) & 0xFF);
                 default:
                   return 0xFF;
               }
@@ -77,14 +77,14 @@ uint8_t processMessage(uint8_t c){
               switch (commandIndex){
                 case 3:
                   if (c == 'M'){
-                    reboot = HIGH;
+                    temp_b = HIGH;
                     return 0x00;
                   }else{
-                    reboot = LOW;
+                    temp_b = LOW;
                     return 0xFF;
                   }
                 case 4:
-                  if (reboot && c == 'S'){
+                  if (temp_b && c == 'S'){
                     wdt_enable(WDTO_250MS);
                     return 0x00;
                   }else{
@@ -104,7 +104,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.temperature_outside;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -115,7 +115,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.temperature_inside;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -126,7 +126,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.temperature_water;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -137,7 +137,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.temperature_light1;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -148,7 +148,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.temperature_light2;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -159,7 +159,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.temperature_light3;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -170,7 +170,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.humidity_outside;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -181,7 +181,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.humidity_inside;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -190,9 +190,9 @@ uint8_t processMessage(uint8_t c){
                 switch (commandIndex){
                   case 3:
                     temp_ii = DataStorage.co2;
-                    return (temp_ii >> 8);
+                    return ((temp_ii >> 8) & 0xFF);
                   case 4:
-                    return temp_ii & 0xFF;
+                    return (temp_ii & 0xFF);
                   default:
                     return 0xFF;
                 }             
@@ -202,7 +202,7 @@ uint8_t processMessage(uint8_t c){
                     temp_f = DataStorage.ph;
                     return (int)temp_f;
                   case 4:
-                    temp_i = 0;//(int)temp;
+                    temp_i = (int)temp_f;
                     return (int) ( (temp_f - temp_i) * 100.0);
                   default:
                     return 0xFF;
@@ -211,9 +211,9 @@ uint8_t processMessage(uint8_t c){
                 switch (commandIndex){
                   case 3:
                     temp_ii = DataStorage.redox;
-                    return (temp_ii >> 8);
+                    return ((temp_ii >> 8) & 0xFF);
                   case 4:
-                    return temp_ii & 0xFF;
+                    return (temp_ii & 0xFF);
                   default:
                     return 0xFF;
                 }             
@@ -241,9 +241,9 @@ uint8_t processMessage(uint8_t c){
               switch (commandIndex){
                 case 3:
                   temp_ii = DataStorage.light_position;
-                  return (temp_ii >> 8);
+                  return ((temp_ii >> 8) & 0xFF);
                 case 4:
-                  return temp_ii & 0xFF;
+                  return (temp_ii & 0xFF);
                 default:
                   return 0xFF;
               }             
@@ -262,9 +262,9 @@ uint8_t processMessage(uint8_t c){
               switch (commandIndex){
                 case 3:
                   temp_ii = DataStorage.light_counter;
-                  return (temp_ii >> 8);
+                  return ((temp_ii >> 8) & 0xFF);
                 case 4:
-                  return temp_ii & 0xFF;
+                  return (temp_ii & 0xFF);
                 default:
                   return 0xFF;
               }                         
