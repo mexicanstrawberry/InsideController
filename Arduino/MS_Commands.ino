@@ -66,7 +66,7 @@ uint8_t processMessage(uint8_t c){
                 case 3:
                   temp_iii = millis();
                   //days
-                  return abs(temp_iii/DAY);
+                  return (int)(temp_iii / DAY);
                 case 4:
                   // hours
                   return ((temp_iii % DAY) / HOUR);
