@@ -55,7 +55,7 @@ void setup() {
 }
 
 void loop() {
-  float h = dht.readHumidity();
-  sensors.requestTemperatures();
+  //float h = dht.readHumidity();
+  //sensors.requestTemperatures();
 }
 

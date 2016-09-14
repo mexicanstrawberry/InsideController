@@ -5,7 +5,7 @@
 #define WAIT_FOR_SIZE        2
 #define WAIT_FOR_DATA        3
 
-#define MILLIS    1
+#define MILLIS    1.0
 #define SECOND 1000 * MILLIS
 #define MINUTE   60 * SECOND
 #define HOUR     60 * MINUTE
@@ -69,13 +69,13 @@ uint8_t processMessage(uint8_t c){
                   return (uint8_t)(temp_iii / DAY);
                 case 4:
                   // hours
-                  return (int)((temp_iii % DAY) / HOUR);
+                  return (uint8_t)((temp_iii % DAY) / HOUR);
                 case 5:
                   // minutes
-                  return (int)((temp_iii % HOUR) / MINUTE);
+                  return (uint8_t)((temp_iii % HOUR) / MINUTE);
                 case 6:
                   // seconds
-                  return (int)((temp_iii % MINUTE) / SECOND);
+                  return (uint8_t)((temp_iii % MINUTE) / SECOND);
                 default:
                   return 0xFF;
               }
