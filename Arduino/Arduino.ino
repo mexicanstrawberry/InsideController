@@ -14,21 +14,21 @@ DeviceAddress Temp_1, Temp_2, Temp_3;
 Data_s        DataStorage;
 
 void setDefaults(){
-  DataStorage.temperature_outside             = 0;
-  DataStorage.temperature_inside              = 0;
-  DataStorage.temperature_water               = 0;
-  DataStorage.temperature_light1              = 0;
-  DataStorage.temperature_light2              = 0;
-  DataStorage.temperature_light3              = 0;
-  DataStorage.humidity_outside                = 0;
-  DataStorage.humidity_inside                 = 0;
-  DataStorage.co2                             = 0;
-  DataStorage.ph                              = 0;
-  DataStorage.redox                           = 0;
+  DataStorage.temperature_outside             = 3.14;
+  DataStorage.temperature_inside              = 3.14;
+  DataStorage.temperature_water               = 3.14;
+  DataStorage.temperature_light1              = 3.14;
+  DataStorage.temperature_light2              = 3.14;
+  DataStorage.temperature_light3              = 3.14;
+  DataStorage.humidity_outside                = 3.14;
+  DataStorage.humidity_inside                 = 3.14;
+  DataStorage.co2                             = 31415;
+  DataStorage.ph                              = 3.14;
+  DataStorage.redox                           = 31415;
 
   DataStorage.light_speed                     = 50;
   DataStorage.light_position                  = 0;
-  DataStorage.light_counter                   = 0;
+  DataStorage.light_counter                   = 23;
   DataStorage.light_fan_1_speed               = 0;
   DataStorage.light_fan_1_desired_temperature = 42;
   DataStorage.light_fan_2_speed               = 0;
