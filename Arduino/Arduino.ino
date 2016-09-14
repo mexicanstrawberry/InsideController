@@ -14,7 +14,6 @@ DeviceAddress Temp_1, Temp_2, Temp_3;
 Data_s        DataStorage;
 
 void setDefaults(){
-  
   DataStorage.temperature_outside             = 0;
   DataStorage.temperature_inside              = 0;
   DataStorage.temperature_water               = 0;
@@ -46,7 +45,6 @@ void setDefaults(){
     
   DataStorage.heater_air                      = 0;
   DataStorage.heater_water                    = 0;
-
 }
 
 void setup() {
@@ -54,10 +52,10 @@ void setup() {
   dht.begin();
   sensors.begin();
   SPISlaveInit();
-  crc_string(1212);
 }
 
 void loop() {
   float h = dht.readHumidity();
+  sensors.requestTemperatures();
 }
 
